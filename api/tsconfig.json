@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "esnext", // Changed to "esnext" for better compatibility and future-proofing
+    "module": "commonjs",
+    "lib": ["dom", "es2017", "es2019"], // Removed "es6" and "esnext.asynciterable" as they are redundant or unnecessary
+    "sourceMap": true,
+    "outDir": "./build",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true, // Changed to true for stricter property initialization checks
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true, // Changed to true for stricter return type checks
+    "noFallthroughCasesInSwitch": true,
+    "moduleResolution": "node",
+    "baseUrl": "./src", // Added "./" for clarity
+    "paths": {
+      "*": ["*"] // Simplified the path mapping to avoid unnecessary directory changes
+    },
+    "types": ["node"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"] // Removed "./" from the include path for consistency
+}

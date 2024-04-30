@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_PASSWORD=flavius
+      - POSTGRES_DB=bossu_development
+    ports:
+      - 5432:5432
+    networks:
+      - shared-networks
+    volumes:
+      - ./postgres-db:/var/lib/postgresql/data
+
+  jira_api:
+    container_name: jira_api
+    restart: unless-stopped
+    image: jira-api-prod:1.0.0
+    build: 
+      context: production
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    networks:
+      - shared-networks
+    depends_on:
+      - postgres
+  
+  jira_client:
+    container_name: jira_client
+    restart: unless-stopped
+    image: jira-client-api-prod:1.0.0
+    build: 
+      context: client
+      target: production
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8081
+    networks:
+      - shared-networks
+    depends_on:
+      - jira_api
+
+networks:
+  shared-networks:
+    driver: bridge
